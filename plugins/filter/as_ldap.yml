@@ -1,0 +1,36 @@
+DOCUMENTATION:
+  name: as_ldap
+  author:
+    - Dor Breger (@DorBreger)
+  short_description: Converts a domain name to it's LDAP format.
+  version_added: 1.7.0
+  seealso:
+    - ref: microsoft.ad.as_guid <ansible_collections.microsoft.ad.as_guid_filter>
+      description: microsoft.ad.as_guid filter
+    - ref: microsoft.ad.as_sid <ansible_collections.microsoft.ad.as_sid_filter>
+      description: microsoft.ad.as_sid filter
+    - ref: microsoft.ad.ldap <ansible_collections.microsoft.ad.ldap_inventory>
+      description: microsoft.ad.ldap inventory
+  description:
+    - Converts a domain name to it's LDAP format.
+  positional: _input
+  options:
+    _input:
+      description:
+        - The domain name to convert to it's LDAP format.
+      type: raw
+      required: true
+
+EXAMPLES: |
+
+  # Converting from the coerced value
+  microsoft.ad.computer:
+    microsoft.ad.computer:
+      name: acomputer
+      path: "OU=Servers,{{ ansible_domain | as_ldap }}"
+
+RETURN:
+  _value:
+    description:
+      - The LDAP format of the domain name.
+    type: string
